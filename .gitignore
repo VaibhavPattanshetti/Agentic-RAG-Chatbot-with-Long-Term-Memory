@@ -216,3 +216,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+
+# API Keys
+.env.*
+
+# OAuth (Google/Gmail)
+credentials.json
+token.json
+client_secret*.json
+
+# Local databases (if generated locally)
+*.db
+*.sqlite
+*.sqlite3
+
+# Vector stores / embeddings (if you don't want to upload them)
+faiss_indexes/
