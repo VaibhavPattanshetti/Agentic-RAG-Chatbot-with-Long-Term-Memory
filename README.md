@@ -1,8 +1,28 @@
 # 🤖 Agentic RAG Chatbot with Long-Term Memory
 
-An intelligent, tool-using chatbot built with **LangGraph** that combines Retrieval-Augmented Generation (RAG) over user-uploaded PDFs, persistent long-term memory across sessions, and access to external tools — all wrapped in a clean **Streamlit** interface.
+An intelligent, multi-tool conversational **agent** built with **LangGraph** and **Streamlit** — it doesn't just reply, it *decides*: when to search the web, query your PDFs, fetch a live stock price, run a calculation, or call an MCP tool. It also remembers relevant facts about you across sessions, so it gets more personalized the more you use it.
 
-Unlike a simple chatbot, this project is an **agent**: it decides when to search the web, query a PDF, fetch a stock price, do a calculation, or call an MCP server tool — and it remembers relevant facts about the user across conversations.
+---
+
+## ⚙️ How It Works Internally
+
+### 1. The Agent Graph
+The chatbot is built as a graph of nodes:
+- **`remember_node`** → looks at your latest message and decides if anything new should be saved to memory.
+- **`chat_node`** → generates the actual reply, with access to all tools.
+- **`tools` node** → executes whichever tool the model decided to call.
+
+The graph loops between `chat_node` and `tools` until the model has everything it needs to answer.
+
+### 2. Memory System
+- **Short-term memory** lives in `chatbot.db` and stores the full message history per chat thread (so each "New Chat" is independent).
+- **Long-term memory** lives in `ltm.db` and stores atomic facts about the user (e.g., *"User's name is Vaibhav"*, *"User works with LangGraph"*). Before every reply, an LLM call checks your message for new facts and only saves genuinely new information (no duplicates).
+
+### 3. Document Q&A (RAG)
+When you upload a PDF, it's split into chunks, embedded, and stored in a **FAISS index** unique to that chat thread. When you ask a question, the most relevant chunks are retrieved and given to the model as context.
+
+### 4. Expense Tracking via MCP
+The expense tracker is a completely separate program (`expense-tracker-mcp-server/main.py`) that runs as its own process. It exposes tools like `add_expense`, `list_expenses`, `summarize`, and `delete_expense`. The chatbot talks to it using the **Model Context Protocol**, meaning the tracker could even be swapped out or reused by a totally different AI application.
 
 ---
 
