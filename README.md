@@ -6,6 +6,8 @@ An intelligent, multi-tool conversational **agent** built with **LangGraph** and
 
 ## ⚙️ How It Works Internally
 
+![LangGraph flow](graph.png)
+
 ### 1. The Agent Graph
 The chatbot is built as a graph of nodes:
 - **`remember_node`** → looks at your latest message and decides if anything new should be saved to memory.
