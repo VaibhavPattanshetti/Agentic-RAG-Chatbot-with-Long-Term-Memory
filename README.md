@@ -72,16 +72,21 @@ END
 ## 📁 Project Structure
 
 ```
-agentic-rag-chatbot/
-├── app.py                  # Streamlit frontend (chat UI, PDF upload, thread management)
-├── backend/
-│   └── graph.py             # LangGraph backend: nodes, tools, memory, checkpointing
-├── faiss_indexes/           # Per-thread FAISS vector stores (generated at runtime, gitignored)
-├── requirements.txt
-├── .env.example
+Agentic-RAG-Chatbot-with-Long-Term-Memory/
+│
+├── langgraph_tool_backend.py      # Core agent logic: graph, tools, memory, RAG
+├── streamlit_frontend_tool.py     # Streamlit chat UI, PDF upload, threading
+├── requirements.txt               # Python dependencies
+├── .env.example                   # Example environment variables file
 ├── .gitignore
-├── README.md
-└── LICENSE
+├── LICENSE
+│
+└── expense-tracker-mcp-server/    # Standalone MCP server for expense tracking
+    ├── main.py                    # MCP tool definitions (add/list/update/delete/summarize)
+    ├── categories.json            # Allowed expense categories & subcategories
+    ├── pyproject.toml
+    ├── uv.lock
+    └── .python-version
 ```
 
 ---
@@ -135,15 +140,5 @@ The app will open at `http://localhost:8501`.
 2. **Upload a PDF** (optional) to enable document-grounded Q&A for that thread.
 3. **Chat naturally** — ask general questions, request stock prices, do math, or ask about the uploaded document. The agent decides which tool(s) to use.
 4. Over time, the assistant **remembers stable facts about you** (name, projects, preferences) and personalizes its responses and greetings accordingly.
-
----
-
-## 🗺️ Roadmap / Ideas for Extension
-
-- [ ] Swap `InMemoryStore` for a persistent long-term memory backend (e.g., Postgres or Redis)
-- [ ] Add memory editing/deletion via the UI
-- [ ] Support multiple documents per thread with source attribution in answers
-- [ ] Add evaluation/observability (e.g., LangSmith tracing)
-- [ ] Containerize with Docker for easier deployment
 
 ---
