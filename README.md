@@ -8,17 +8,17 @@ Unlike a simple chatbot, this project is an **agent**: it decides when to search
 
 ## ✨ Features
 
-- **🧠 Long-Term Memory** — Automatically extracts and stores stable facts about the user (name, preferences, ongoing projects) in a memory store, then injects them into the system prompt to personalize every response. Duplicate/redundant memories are filtered out using an LLM-based memory extractor.
-- **📄 Agentic RAG over PDFs** — Upload a PDF per chat thread; it's chunked, embedded, and indexed with FAISS. The agent decides on its own when to call the `rag_tool` to retrieve relevant context instead of always forcing retrieval.
-- **🔧 Tool-Calling Agent** — Built on LangGraph's `ToolNode` and `tools_condition`, the agent can autonomously choose between:
-  - `web_search` (via Tavily) for current/general information
-  - `get_stock_price` (via Alpha Vantage) for live stock quotes
-  - `calculator` for arithmetic
-  - `rag_tool` for document-grounded answers
-  - **MCP server tools** (e.g., a custom expense tracker) via `langchain-mcp-adapters`
-- **💬 Multi-Thread Conversations** — Each chat has its own thread ID, persisted via `AsyncSqliteSaver` checkpointing, so conversations can be resumed, switched, and listed from the sidebar.
-- **⚡ Streaming Responses** — Assistant tokens stream live in the UI, with tool usage shown via real-time status indicators (e.g., "🔧 Using `web_search` …").
-- **🔌 MCP Integration** — Demonstrates connecting to a custom [Model Context Protocol](https://modelcontextprotocol.io/) server to extend the agent with external, stateful tools (e.g., an expense tracker).
+| Feature | Description |
+|---|---|
+| 🧠 **Long-Term Memory** | Learns and stores facts about the user across sessions using a persistent SQLite-backed memory store |
+| 💬 **Short-Term Memory** | Keeps track of the ongoing conversation per chat thread |
+| 📄 **PDF-based RAG** | Upload a PDF and ask questions about its content — powered by FAISS vector search |
+| 🌐 **Web Search** | Fetches real-time information from the internet using Tavily |
+| 📈 **Stock Price Lookup** | Gets live stock quotes using the Alpha Vantage API |
+| 🧮 **Calculator** | Performs basic arithmetic operations |
+| 💰 **Expense Tracker (MCP)** | A separate MCP (Model Context Protocol) server that lets the bot add, update, delete, and summarize your expenses |
+| 🔀 **Multi-threaded Conversations** | Create and switch between multiple independent chat sessions |
+| ⚡ **Streaming Responses** | Answers stream in token-by-token for a smooth, real-time chat feel |
 
 ---
 
