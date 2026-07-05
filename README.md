@@ -64,20 +64,20 @@ This shows what's actually running behind the graph — the models, storage, and
    → ltm.db)                               │
   atomic facts                             │
   about the user                           │
-                                            │
-        ┌───────────────┬──────────────────┼───────────────────┐
-        ▼               ▼                  ▼                   ▼
-   FAISS RAG      Tavily Search       Calculator          Stock Price
-   Tool                Tool              Tool             Tool
-   (per-thread                                             (Alpha Vantage
-    vector index,                                           GLOBAL_QUOTE API)
+                                           │
+        ┌───────────────┬──────────────────┼───────────────────┬───────────────────────┐
+        ▼               ▼                  ▼                   ▼                       ▼
+   FAISS RAG      Tavily Search       Calculator          Stock Price           MCP Expense Tracker
+   Tool                Tool              Tool             Tool                  (FastMCP server,
+   (per-thread                                            (Alpha Vantage          separate process,
+    vector index,                                          GLOBAL_QUOTE API)       expenses.db)
     text-embedding-
-    3-small)                                                       │
-        │                                                          ▼
-        ▼                                              MCP Expense Tracker
-  Uploaded PDFs                                        (FastMCP server,
-  (chunked +                                            separate process,
-   embedded)                                            expenses.db)
+    3-small)                                                  
+        │                                                      
+        ▼                                             
+  Uploaded PDFs                                    
+  (chunked +                                           
+   embedded)                                        
 ```
 
 ---
