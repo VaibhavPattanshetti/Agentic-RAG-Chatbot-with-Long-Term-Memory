@@ -125,9 +125,6 @@ OPENAI_API_KEY=your_openai_key_here
 TAVILY_API_KEY=your_tavily_key_here
 ALPHAVANTAGE_API_KEY=your_alphavantage_key_here
 
-# Optional — only needed if running the expense tracker MCP server
-EXPENSE_TRACKER_PYTHON=
-EXPENSE_TRACKER_SCRIPT=
 ```
 
 ### 4. Run the app
