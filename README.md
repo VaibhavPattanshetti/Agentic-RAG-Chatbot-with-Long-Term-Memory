@@ -46,30 +46,7 @@ The expense tracker is a completely separate program (`expense-tracker-mcp-serve
 
 The core of the system is a LangGraph state graph:
 
-```
-START
-  │
-  ▼
-remember_node   ──►  extracts new long-term memories from the latest user message
-  │
-  ▼
-chat_node       ──►  generates a response, personalized using stored memory,
-  │                  and decides whether to call a tool
-  │
-  ├──► tools_condition ──► tools (web_search / get_stock_price / calculator /
-  │         │                     rag_tool / MCP tools)
-  │         │
-  │         └──────────────► back to chat_node
-  │
-  ▼
-END
-```
-
-**Key design choices:**
-- **Memory and chat are decoupled** into separate nodes so memory extraction (via a structured-output LLM call) doesn't pollute the main conversation context.
-- **Per-thread RAG indexes** mean each chat conversation can reference its own uploaded document without interference from other threads.
-- **Checkpointing with `AsyncSqliteSaver`** gives durable conversation history and the ability to list/resume past threads.
-- **`InMemoryStore`** holds long-term memory namespaced by user ID, separate from short-term conversation state.
+![LangGraph flow](graph.png)
 
 ---
 
