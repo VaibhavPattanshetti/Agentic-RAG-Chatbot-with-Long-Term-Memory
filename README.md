@@ -46,9 +46,39 @@ The expense tracker is a completely separate program (`expense-tracker-mcp-serve
 
 ## 🏗️ Architecture
 
-The core of the system is a LangGraph state graph:
+This shows what's actually running behind the graph — the models, storage, and tools:
 
-![LangGraph flow](graph.png)
+```
+                    Streamlit UI (streamlit_frontend_tool.py)
+                                  │
+                                  ▼
+                     LangGraph Agent (StateGraph)
+                                  │
+        ┌─────────────────┬──────┴───────┬─────────────────┐
+        ▼                 ▼              ▼                 ▼
+  remember_node        chat_node      tools node      Checkpointer
+        │           (gpt-4.1-mini)         │           (SqliteSaver
+        ▼            via ChatOpenAI        │            → chatbot.db)
+ Long-Term Memory                          │           per-thread chat
+  (SqliteStore                             │              history
+   → ltm.db)                               │
+  atomic facts                             │
+  about the user                           │
+                                            │
+        ┌───────────────┬──────────────────┼───────────────────┐
+        ▼               ▼                  ▼                   ▼
+   FAISS RAG      Tavily Search       Calculator          Stock Price
+   Tool                Tool              Tool             Tool
+   (per-thread                                             (Alpha Vantage
+    vector index,                                           GLOBAL_QUOTE API)
+    text-embedding-
+    3-small)                                                       │
+        │                                                          ▼
+        ▼                                              MCP Expense Tracker
+  Uploaded PDFs                                        (FastMCP server,
+  (chunked +                                            separate process,
+   embedded)                                            expenses.db)
+```
 
 ---
 
