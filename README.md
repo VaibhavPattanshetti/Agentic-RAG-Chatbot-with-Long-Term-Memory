@@ -96,7 +96,10 @@ Agentic-RAG-Chatbot-with-Long-Term-Memory/
 
 ### Prerequisites
 - Python 3.10+
-- API keys for OpenAI and Tavily (and optionally Alpha Vantage)
+- API keys for:
+  - [OpenAI](https://platform.openai.com/) (for the LLM and embeddings)
+  - [Tavily](https://tavily.com/) (for web search)
+  - [Alpha Vantage](https://www.alphavantage.co/) (for stock prices)
 
 ### 1. Clone the repo
 ```bash
