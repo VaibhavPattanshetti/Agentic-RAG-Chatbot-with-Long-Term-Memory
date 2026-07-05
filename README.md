@@ -57,15 +57,16 @@ END
 
 | Layer | Technology |
 |---|---|
-| Agent orchestration | [LangGraph](https://langchain-ai.github.io/langgraph/) |
+| Agent orchestration | [LangGraph](https://www.langchain.com/langgraph) (`StateGraph`, conditional tool routing) |
 | LLM | OpenAI `gpt-4.1-mini` (chat), `gpt-4o-mini` (memory extraction) |
 | Embeddings | OpenAI `text-embedding-3-small` |
-| Vector store | FAISS |
 | Web search | Tavily |
 | Stock data | Alpha Vantage |
-| External tools | MCP (Model Context Protocol) via `langchain-mcp-adapters` |
-| Persistence | SQLite (`aiosqlite` + LangGraph `AsyncSqliteSaver`) |
-| Frontend | Streamlit |
+| External tools | [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) via `langchain-mcp-adapters` |
+| Short-Term Memory | `SqliteSaver` |
+| Long-Term Memory | `SqliteStore` |
+| Frontend | [Streamlit](https://streamlit.io/) |
+| Vector store | FAISS |
 
 ---
 
