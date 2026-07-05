@@ -4,6 +4,22 @@ An intelligent, multi-tool conversational **agent** built with **LangGraph** and
 
 ---
 
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 🧠 **Long-Term Memory** | Learns and stores facts about the user across sessions using a persistent SQLite-backed memory store |
+| 💬 **Short-Term Memory** | Keeps track of the ongoing conversation per chat thread |
+| 📄 **PDF-based RAG** | Upload a PDF and ask questions about its content — powered by FAISS vector search |
+| 🌐 **Web Search** | Fetches real-time information from the internet using Tavily |
+| 📈 **Stock Price Lookup** | Gets live stock quotes using the Alpha Vantage API |
+| 🧮 **Calculator** | Performs basic arithmetic operations |
+| 💰 **Expense Tracker (MCP)** | A separate MCP (Model Context Protocol) server that lets the bot add, update, delete, and summarize your expenses |
+| 🔀 **Multi-threaded Conversations** | Create and switch between multiple independent chat sessions |
+| ⚡ **Streaming Responses** | Answers stream in token-by-token for a smooth, real-time chat feel |
+
+---
+
 ## ⚙️ How It Works Internally
 
 ![LangGraph flow](graph.png)
@@ -25,22 +41,6 @@ When you upload a PDF, it's split into chunks, embedded, and stored in a **FAISS
 
 ### 4. Expense Tracking via MCP
 The expense tracker is a completely separate program (`expense-tracker-mcp-server/main.py`) that runs as its own process. It exposes tools like `add_expense`, `list_expenses`, `summarize`, and `delete_expense`. The chatbot talks to it using the **Model Context Protocol**, meaning the tracker could even be swapped out or reused by a totally different AI application.
-
----
-
-## ✨ Features
-
-| Feature | Description |
-|---|---|
-| 🧠 **Long-Term Memory** | Learns and stores facts about the user across sessions using a persistent SQLite-backed memory store |
-| 💬 **Short-Term Memory** | Keeps track of the ongoing conversation per chat thread |
-| 📄 **PDF-based RAG** | Upload a PDF and ask questions about its content — powered by FAISS vector search |
-| 🌐 **Web Search** | Fetches real-time information from the internet using Tavily |
-| 📈 **Stock Price Lookup** | Gets live stock quotes using the Alpha Vantage API |
-| 🧮 **Calculator** | Performs basic arithmetic operations |
-| 💰 **Expense Tracker (MCP)** | A separate MCP (Model Context Protocol) server that lets the bot add, update, delete, and summarize your expenses |
-| 🔀 **Multi-threaded Conversations** | Create and switch between multiple independent chat sessions |
-| ⚡ **Streaming Responses** | Answers stream in token-by-token for a smooth, real-time chat feel |
 
 ---
 
@@ -157,7 +157,7 @@ ALPHAVANTAGE_API_KEY=your_alphavantage_key_here
 
 ### 4. Run the app
 ```bash
-streamlit run app.py
+streamlit run streamlit_frontend_tool.py
 ```
 The app will open at `http://localhost:8501`.
 
