@@ -132,8 +132,8 @@ Agentic-RAG-Chatbot-with-Long-Term-Memory/
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/<your-username>/agentic-rag-chatbot.git
-cd agentic-rag-chatbot
+git clone https://github.com/VaibhavPattanshetti/Agentic-RAG-Chatbot-with-Long-Term-Memory.git
+cd Agentic-RAG-Chatbot-with-Long-Term-Memory
 ```
 
 ### 2. Create a virtual environment and install dependencies
